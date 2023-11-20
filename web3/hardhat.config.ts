@@ -1,10 +1,10 @@
-import { HardhatUserConfig } from "hardhat/config";
+// import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 require('dotenv').config();
 
 const PRIVATE_KEY: string = String(process.env.NEXT_PUBLIC_PRIVATE_KEY);
 
-const config: HardhatUserConfig = {
+const config = {
   solidity: "0.8.20",
   defaultNetwork: 'sepolia',
   networks: {
