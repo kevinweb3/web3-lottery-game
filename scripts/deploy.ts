@@ -26,7 +26,7 @@ function saveFrontendFiles(
   name: string,
   _contractInfos: object
 ) {
-  const contractDir = __dirname + "/../../contractInfo";
+  const contractDir = __dirname + "/../contractInfo";
 
   if (!fs.existsSync(contractDir)) {
     fs.mkdirSync(contractDir);
