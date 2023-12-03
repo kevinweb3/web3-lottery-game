@@ -19,7 +19,7 @@ export default function Home() {
       <AppContextProvider>
         <Layout className="h-full">
           <Header title={'Lottery Game'}/>
-          {/* <Content/> */}
+          <Content/>
           <Footer/>
         </Layout>
       </AppContextProvider>

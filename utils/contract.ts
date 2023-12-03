@@ -1,4 +1,4 @@
-import ethers from 'ethers'
+import { ethers } from 'ethers'
 import lotteryJson from '../contractInfo/Lottery.json'
 import lotteryAddress from '../contractInfo/contractAddress.json'
 
@@ -113,8 +113,8 @@ export async function requestAccounts(): Promise<Address[]> {
 export async function pickWinner(from: Address): Promise<void> {
   const provider = new ethers.BrowserProvider(window.ethereum)
   const lotteryContract = new ethers.Contract(
-    abi,
     contractAddress,
+    abi,
     provider
   );
   if (from) {
@@ -128,8 +128,8 @@ export async function enterLottery(
 ): Promise<string> {
   const provider = new ethers.BrowserProvider(window.ethereum)
   const lotteryContract = new ethers.Contract(
-    abi,
     contractAddress,
+    abi,
     provider
   );
   return lotteryContract.send({
@@ -141,11 +141,13 @@ export async function enterLottery(
 export async function getContractBalance(): Promise<Amount> {
   const provider = new ethers.BrowserProvider(window.ethereum)
   const lotteryContract = new ethers.Contract(
-    abi,
     contractAddress,
+    abi,
     provider
   );
-  return lotteryContract.balanceOf(contractAddress);
+  console.log(lotteryContract, 999999);
+  const balance: any = await provider.getBalance(contractAddress);
+  return balance;
 }
 
 
@@ -162,15 +164,15 @@ export async function getContractDetails(
   const provider = new ethers.BrowserProvider(window.ethereum)
   const signer = provider.getSigner();
   const lotteryContract = new ethers.Contract(
-    abi,
     contractAddress,
+    abi,
     provider
   );
 
   const owner: any = lotteryContract.owner();
   const players: any = lotteryContract.getPlayers();
   const balance: any = ethers.formatEther(await provider.getBalance(address));
-  const contractBalance: any = lotteryContract.balanceOf(contractAddress);
+  const contractBalance: any = await provider.getBalance(contractAddress);
 
   const participants = players.length
   const hasEntered = players.includes(address)
